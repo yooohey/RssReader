@@ -15,13 +15,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 public class MainActivity extends Activity {
 	static String strUrl,title;
+	 private ArrayList mItems;
+	 private RssListAdapter mAdapter;
 	
 	Future<?> waiting=null;
 	ExecutorService executorService;
@@ -30,7 +35,7 @@ public class MainActivity extends Activity {
 	Runnable inMainThread = new Runnable(){
 		@Override
 		public void run(){
-			View btn = findViewById(R.id.button1);
+			View btn = findViewById(R.id.button_ref);
 			TextView tv = (TextView)findViewById(R.id.textView1);
 			if(content=="")content = getResources().getString(R.string.message_error);
 			tv.setText(Html.fromHtml(content));
@@ -57,18 +62,31 @@ public class MainActivity extends Activity {
     	SharedPreferences prefs = getSharedPreferences("RssReaderPrefs", MODE_PRIVATE);
     	strUrl = prefs.getString("server", getResources().getTextArray(R.array.ServiceUrl)[0].toString());
     	
-    	findViewById(R.id.button1).setOnClickListener(new OnClickListener(){
+    	findViewById(R.id.button_ref).setOnClickListener(new OnClickListener(){
     		@Override
     		public void onClick(View v) {
     			showRss();
     		}
     	});
-    	showRss();
+    	
+    	 mItems = new ArrayList();
+    	 mAdapter = new RssListAdapter(this, mItems);
+
+    	 ListView _listview = (ListView)findViewById(R.id.listView1);
+
+    	 _listview.setAdapter(mAdapter);
+
+    	 // サンプル用に空のItemオブジェクトをセットする
+    	 for (int i = 0; i < 10; i++) {
+    	 mAdapter.add(new Item());
+    	 }
+    	 
+    	//showRss();
     }
     
     public void showRss(){
     	title = getResources().getString(R.string.app_name);
-    	View btn = findViewById(R.id.button1);
+    	View btn = findViewById(R.id.button_ref);
     	btn.setEnabled(false);
     	
     	executorService = Executors.newSingleThreadExecutor();

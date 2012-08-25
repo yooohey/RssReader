@@ -3,18 +3,18 @@
     android:layout_width ="fill_parent"
     android:layout_height ="fill_parent"
     android:orientation ="vertical" >
-
-    <TextView
-        android:id="@+id/textView1"
-        android:clickable ="false"
-        android:text ="@string/message_loading"
-        android:textSize ="20sp"
-        android:layout_width ="match_parent"
-        android:layout_height ="match_parent"        
-        android:layout_weight ="1"/>
+	<ListView 
+		android:layout_width="fill_parent" 
+		android:id="@+id/listView1" 
+		android:layout_height="wrap_content">
+	</ListView>
+	<TextView  
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" 
+		android:text="@string/message_loading"/>
 
     <Button
-        android:id ="@+id/button1"
+        android:id ="@+id/button_ref"
         android:layout_width ="match_parent"
         android:layout_height ="wrap_content"
         android:text ="@string/label_refresh" />
