@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="ServiceName">
+        <item>yahoo news</item>
+        <item>スギヤマスタイル</item>
+    </string-array>
+    <string-array name="ServiceUrl">
+        <item>http://rss.dailynews.yahoo.co.jp/fc/rss.xml</item>
+        <item>http://www.sugiyama-style.tv/index.rdf</item>
+    </string-array>
+    
+</resources>
